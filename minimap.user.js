@@ -4,8 +4,8 @@
 // @version      31
 // @description  PlaceMap
 // @author       furkan#3251
-// @match        https://pixelzone.io/*
-// @match        http://pixelzone.io/*
+// @match        https://pixelplace.fun/*
+// @match        http://pixelplace.fun/*
 // @homepage     https://github.com/Furkan2514/PlaceMinimap/
 // @updateURL    https://raw.githubusercontent.com/Furkan2514/PlaceMinimap/master/minimap.user.js
 // @downloadURL  https://raw.githubusercontent.com/Furkan2514/PlaceMinimap/master/minimap.user.js
