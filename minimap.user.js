@@ -1,31 +1,30 @@
 // ==UserScript==
-// @name         PixelPlaceMinimap
-// @namespace    http://tampermonkey.net/
+// @name         Minimap PP 
+// @namespace    https://discord.io/trplace
 // @version      31
-// @description  PlaceMap
-// @author       furkan#3251
+// @description  Minimap for Place
+// @author       Marcos-Emf
 // @match        https://pixelplace.fun/*
 // @match        http://pixelplace.fun/*
-// @homepage     https://github.com/Furkan2514/PlaceMinimap/
-// @updateURL    https://raw.githubusercontent.com/Furkan2514/PlaceMinimap/master/minimap.user.js
-// @downloadURL  https://raw.githubusercontent.com/Furkan2514/PlaceMinimap/master/minimap.user.js
+// @homepage     https://github.com/Furkan2514/PixelPlaceMap-v31
+// @updateURL    https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master/minimap.user.js
+// @downloadURL  https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master/minimap.user.js
 // @grant        none
 // ==/UserScript==
 
-Number.prototype.between = function(a, b) {
-  var min = Math.min.apply(Math, [a, b]),
-    max = Math.max.apply(Math, [a, b]);
-  return this > min && this < max;
-};
-var range = 25;
-window.baseTepmlateUrl = 'https://raw.githubusercontent.com/Furkan2514/PlaceMinimap/master/';
+//xd3
+//xd3
+//xd1
+//xd
+
+window.baseTepmlateUrl = 'https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master';
 
 window.addEventListener('load', function () {
     //Regular Expression to get coordinates out of URL
-    re = /(.*)\/\?p=(\-?(?:\d*)),(\-?(?:\d*))/g;
+    re = /(.*)@(.*),(.*)/g;
     //Regular Expression to get coordinates from cursor
-    rec = /x\:(\d*) y\:(\d*)/g;
-    gameWindow = document.getElementById("canvas");
+    rec = /\((.*), (.*)\)/g;
+    gameWindow = document.getElementById("gameWindow");
     //DOM element of the displayed X, Y variables
     coorDOM = null;
     findCoor();
@@ -54,17 +53,17 @@ window.addEventListener('load', function () {
 
     var div = document.createElement('div');
     div.setAttribute('class', 'post block bc2');
-  
+    div.innerHTML = '<div id="minimapbg" style="position: absolute; right: 1em; bottom: 1em;">' +
+        '<div class="posy" id="posyt" style="background-color: rgba(0, 0, 0, 0.75); color: rgb(250, 250, 250); text-align: center; line-height: 42px; vertical-align: middle; width: auto; height: auto; border-radius: 21px; padding: 6px;">' +
         '<div id="minimap-text" style="display: none;"></div>' +
         '<div id="minimap-box" style="position: relative;width:420px;height:300px">' +
         '<canvas id="minimap" style="width: 100%; height: 100%;z-index:1;position:absolute;top:0;left:0;"></canvas>' +
         '<canvas id="minimap-board" style="width: 100%; height: 100%;z-index:2;position:absolute;top:0;left:0;"></canvas>' +
         '<canvas id="minimap-cursor" style="width: 100%; height: 100%;z-index:3;position:absolute;top:0;left:0;"></canvas>' +
         '</div><div id="minimap-config" style="line-height:20px;">' +
-		'<a href=https://discord.io/trplace target="_blank">Discord' +
-        '</a> | <span id="hide-map" style="cursor:pointer;color:white"> Haritayı Gizle' +
+        '<span id="hide-map" style="cursor:pointer;">Haritayı Sakla' +
         '</span> | <span id="follow-mouse" style="cursor:pointer;">Fareyi Takip Et' +
-        '</span>| Zoom: <span id="zoom-plus" style="cursor:pointer;font-weight:bold;">+</span> / ' +
+        '</span> | Yakınlaştır: <span id="zoom-plus" style="cursor:pointer;font-weight:bold;">+</span>  /  ' +
         '<span id="zoom-minus" style="cursor:pointer;font-weight:bold;">-</span>' +
         '</div>' +
         '</div>';
@@ -92,7 +91,7 @@ window.addEventListener('load', function () {
     drawCursor();
 
     document.getElementById("hide-map").onclick = function () {
-        console.log("This should do something, but it doesn't");
+        // console.log("This should do something, but it doesn't");
         toggle_show = false;
         document.getElementById("minimap-box").style.display = "none";
         document.getElementById("minimap-config").style.display = "none";
@@ -140,7 +139,6 @@ window.addEventListener('load', function () {
         }
     };
 
-    gameWindow = document.getElementById("canvas");
     gameWindow.addEventListener('mouseup', function (evt) {
         if (!toggle_show)
             return;
@@ -151,15 +149,11 @@ window.addEventListener('load', function () {
     gameWindow.addEventListener('mousemove', function (evt) {
         if (!toggle_show)
             return;
-        coorDOM = document.getElementById("coords");
-        coordsXY = coorDOM.innerHTML.split(/(\d+)/)
-        //console.log(coordsXY);
-        x_new = (coordsXY[0].substring(2) + coordsXY[1])*1
-        y_new = (coordsXY[2].substring(3) + coordsXY[3])*1;
-        //console.log({x_new,y_new});
+        x_new = coorDOM.innerHTML.replace(rec, '$1');
+        y_new = coorDOM.innerHTML.replace(rec, '$2');
         if (x != x_new || y != y_new) {
-            x = parseInt(x_new);
-            y = parseInt(y_new);
+            x = x_new;
+            y = y_new;
             if (toggle_follow) {
                 x_window = x;
                 y_window = y;
@@ -173,16 +167,32 @@ window.addEventListener('load', function () {
     updateloop();
 
 }, false);
+function exportMd() {
+    console.clear();
+    var ttlpx = 0;
+    var mdstr = "";
 
+    Object.keys(template_list).map(function (index, ele) {
+        var eles = template_list[index];
+        mdstr += '\n#### ' + index;
+        mdstr += '\n[![](https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master/images/' + eles.name + ')]';
+        mdstr += '(http://pixelplace.fun/@' + Math.floor(eles.x + eles.width / 2) + ',' + Math.floor(eles.y + eles.height / 2) + ')'
+        mdstr += '\n';
+        ttlpx += eles.width * eles.height;
+    });
+    mdstr = '### Toplam pixel sayısı =' + ttlpx + '\n' + mdstr;
+    console.log(mdstr);
+}
 function updateloop() {
 
-    console.log("Updating Template List");
+    // console.log("Updating Template List");
     // Get JSON of available templates
     var xmlhttp = new XMLHttpRequest();
-    var url = window.baseTepmlateUrl + "templates/data.json?" + new Date().getTime();
+    var url = window.baseTepmlateUrl + "/templates/data.json";
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             template_list = JSON.parse(this.responseText);
+            exportMd();
             if (!toggle_follow)
                 getCenter();
         }
@@ -190,7 +200,7 @@ function updateloop() {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
-    console.log("Refresh got forced.");
+    // console.log("Refresh got forced.");
     image_list = [];
     loadTemplates();
 
@@ -255,11 +265,11 @@ function loadTemplates() {
     var x_right = x_window * 1 + minimap.width / zoomlevel / 2;
     var y_top = y_window * 1 - minimap.height / zoomlevel / 2;
     var y_bottom = y_window * 1 + minimap.height / zoomlevel / 2;
-    //console.log("x_left : " + x_left);
-    //console.log("x_right : " + x_right);
-    //console.log("y_top : " + y_top);
-    //console.log("y_bottom : " + y_bottom);
-    //console.log(template_list);
+    // console.log("x_left : " + x_left);
+    // console.log("x_right : " + x_right);
+    // console.log("y_top : " + y_top);
+    // console.log("y_bottom : " + y_bottom);
+    // console.log(template_list);
     var keys = [];
     for (var k in template_list) keys.push(k);
     needed_templates = [];
@@ -267,25 +277,20 @@ function loadTemplates() {
     for (i = 0; i < keys.length; i++) {
         template = keys[i];
 
-        var temp_x = parseInt(template_list[template]["x"]) * 1;
-        var temp_y = parseInt(template_list[template]["y"]) * 1;
-        var temp_xr = parseInt(template_list[template]["x"]) + parseInt(template_list[template]["width"]);
-        var temp_yb = parseInt(template_list[template]["y"]) + parseInt(template_list[template]["height"]);
-        // if (temp_xr <= x_left || temp_yb <= y_top || temp_x >= x_right || temp_y >= y_bottom)
-        //    continue
-        if (!x_window.between(temp_x-range*1, temp_xr+range*1))
+        var temp_x = template_list[template]["x"] * 1;
+        var temp_y = template_list[template]["y"] * 1;
+        var temp_xr = template_list[template]["x"] * 1 + template_list[template]["width"] * 1;
+        var temp_yb = template_list[template]["y"] * 1 + template_list[template]["height"] * 1;
+        if (temp_xr <= x_left || temp_yb <= y_top || temp_x >= x_right || temp_y >= y_bottom)
             continue
-        if (!y_window.between(temp_y-range*1, temp_yb+range*1))
-            continue
-        console.log("Template " + template + " is in range!");
-        // console.log(x_window, y_window);
+        // console.log(" Template " + template + " is in range!");
         needed_templates.push(template);
     }
     if (needed_templates.length == 0) {
         if (zooming_in == false && zooming_out == false) {
             document.getElementById("minimap-box").style.display = "none";
             document.getElementById("minimap-text").style.display = "block";
-            document.getElementById("minimap-text").innerHTML = "Burada template yok.";
+            document.getElementById("minimap-text").innerHTML = "Burada Şablon Bulunamadı";
         }
     } else {
         document.getElementById("minimap-box").style.display = "block";
@@ -305,12 +310,12 @@ function loadTemplates() {
 }
 
 function loadImage(imagename) {
-    console.log("    Load image " + imagename);
+    // console.log("    Load image " + imagename);
     image_list[imagename] = new Image();
     if (cachebreaker != null)
-        image_list[imagename].src = window.baseTepmlateUrl +"images/"+template_list[imagename].name;
+        image_list[imagename].src = window.baseTepmlateUrl + "/images/" + template_list[imagename].name;
     else
-        image_list[imagename].src = window.baseTepmlateUrl +"images/"+ template_list[imagename].name;
+        image_list[imagename].src = window.baseTepmlateUrl + "/images/" + template_list[imagename].name;
     image_list[imagename].onload = function () {
         counter += 1;
         //if last needed image loaded, start drawing
@@ -332,7 +337,6 @@ function drawTemplates() {
         var newheight = zoomlevel * image_list[template].height;
         var img = image_list[template];
         ctx_minimap.drawImage(img, xoff, yoff, newwidth, newheight);
-        console.log("Drawn!");
     }
 }
 
@@ -394,13 +398,12 @@ function findCoor() {
     //all elements with style attributes
     var elms = document.querySelectorAll("*[style]");
     // Loop and find the element with the right style attributes
-    /*Array.prototype.forEach.call(elms, function (elm) {
+    Array.prototype.forEach.call(elms, function (elm) {
         var style = elm.style.cssText;
         if (style == "position: absolute; left: 1em; bottom: 1em;") {
-            console.log("Found It!");
+            // console.log("Found It!");
             coorDOM = elm.firstChild;
-            console.log(coorDOM.innerHTML);
+            // console.log(coorDOM.innerHTML);
         }
-    });*/
-    coorDOM = document.getElementById("coords");
+    });
 }
