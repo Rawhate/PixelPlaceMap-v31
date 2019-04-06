@@ -4,8 +4,8 @@
 // @version      31
 // @description  Minimap for Place
 // @author       Marcos-Emf
-// @match        https://pixelplanet.fun
-// @match        http://pixelplanet.fun
+// @match        https://pixelzone.io
+// @match        http://pixelzone.io
 // @homepage     https://github.com/Rawhate/PixelPlaceMap-v31
 // @updateURL    https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
 // @downloadURL  https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
@@ -176,7 +176,7 @@ function exportMd() {
         var eles = template_list[index];
         mdstr += '\n#### ' + index;
         mdstr += '\n[![](https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/images/' + eles.name + ')]';
-        mdstr += '(http://pixelplace.fun/@' + Math.floor(eles.x + eles.width / 2) + ',' + Math.floor(eles.y + eles.height / 2) + ')'
+        mdstr += '(http://pixelzone.io/@' + Math.floor(eles.x + eles.width / 2) + ',' + Math.floor(eles.y + eles.height / 2) + ')'
         mdstr += '\n';
         ttlpx += eles.width * eles.height;
     });
