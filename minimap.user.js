@@ -7,8 +7,8 @@
 // @match        https://pixelplanet.fun
 // @match        http://pixelplanet.fun
 // @homepage     https://github.com/Rawhate/PixelPlaceMap-v31
-// @updateURL    https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
-// @downloadURL  https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
+// @updateURL    https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/blob/master/minimap.user.js
+// @downloadURL  https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/blob/master/minimap.user.js
 // @grant        none
 // ==/UserScript==
 
