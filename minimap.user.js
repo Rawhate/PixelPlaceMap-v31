@@ -4,11 +4,11 @@
 // @version      31
 // @description  Minimap for Place
 // @author       Marcos-Emf
-// @match        https://pixelplace.fun/*
-// @match        http://pixelplace.fun/*
-// @homepage     https://github.com/Furkan2514/PixelPlaceMap-v31
-// @updateURL    https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master/minimap.user.js
-// @downloadURL  https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master/minimap.user.js
+// @match        https://pixelplanet.fun/*
+// @match        http://pixelplanet.fun/*
+// @homepage     https://github.com/Rawhate/PixelPlaceMap-v31
+// @updateURL    https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
+// @downloadURL  https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
 // @grant        none
 // ==/UserScript==
 
@@ -17,7 +17,7 @@
 //xd1
 //xd
 
-window.baseTepmlateUrl = 'https://raw.githubusercontent.com/Furkan2514/PixelPlaceMap-v31/master';
+window.baseTepmlateUrl = 'https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master';
 
 window.addEventListener('load', function () {
     //Regular Expression to get coordinates out of URL
