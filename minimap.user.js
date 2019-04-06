@@ -4,8 +4,8 @@
 // @version      31
 // @description  Minimap for Place
 // @author       Marcos-Emf
-// @match        https://pixelplanet.fun/*
-// @match        http://pixelplanet.fun/*
+// @match        https://pixelplanet.fun
+// @match        http://pixelplanet.fun
 // @homepage     https://github.com/Rawhate/PixelPlaceMap-v31
 // @updateURL    https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
 // @downloadURL  https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/minimap.user.js
