@@ -17,7 +17,7 @@
 //xd1
 //xd
 
-window.baseTepmlateUrl = 'https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master';
+window.baseTepmlateUrl = 'https://raw.githubusercontent.com/Rawhate/PixelPlaceMap-v31/master/';
 
 window.addEventListener('load', function () {
     //Regular Expression to get coordinates out of URL
